@@ -3,7 +3,7 @@ Validação de Projeto: Sistema de
 Gerenciamento de Inventário de 
 Hardware 
 
-Nomes: João Vitor, Luiz e Júlio Cesar  
+Nomes: João Vitor, Luiz Nascimento e Júlio Cesar  
 1. Validação da Fase de Desenvolvimento  
 1. Information Gerai
      
