@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LV&J - Vendas</title>
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-title">LV&amp;J</div>
+    <span class="logo-sub">Software UMZ</span>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="../index.html" class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Dashboard
+    </a>
+    <a href="../html/ordens.html" class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>
+      Ordens
+    </a>
+    <a href="../html/vendas.html" class="nav-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 001.98-1.67L23 6H6"/></svg>
+      Vendas
+    </a>
+    <a href="../html/clientes.html" class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Clientes
+    </a>
+    <a href="../html/produtos.html" class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73L13 2.27a2 2 0 00-2 0L4 6.27A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+      Produtos
+    </a>
+  </nav>
+  <div class="sidebar-user">
+    <div class="user-avatar">JV</div>
+    <div>
+      <div class="user-name">João Vitor</div>
+      <div class="user-role">Administrador</div>
+    </div>
+  </div>
+</aside>
+
+<main class="main">
+  <div class="page-header">
+    <div class="page-header-left">
+      <h1>Vendas</h1>
+      <p>Gerencie todas as vendas realizadas</p>
+    </div>
+    <button class="btn-primary" onclick="openModal('modalVenda')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Nova Venda
+    </button>
+  </div>
+
+  <div class="stats-grid cols-3">
+    <div class="stat-card">
+      <div>
+        <div class="stat-label">Total de Vendas</div>
+        <div class="stat-value">4</div>
+      </div>
+      <div class="stat-icon blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 001.98-1.67L23 6H6"/></svg>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div>
+        <div class="stat-label">Receita Recebida</div>
+        <div class="stat-value green">R$ 1.450,00</div>
+      </div>
+      <div class="stat-icon green">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div>
+        <div class="stat-label">Receita Pendente</div>
+        <div class="stat-value orange">R$ 210,00</div>
+      </div>
+      <div class="stat-icon yellow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" placeholder="Buscar por cliente, número da venda ou produto..." oninput="filterTable('tabelaVendas', this.value)">
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Número</th>
+            <th>Cliente</th>
+            <th>Produtos</th>
+            <th>Qtd</th>
+            <th>Total</th>
+            <th>Pagamento</th>
+            <th>Status</th>
+            <th>Data</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="tabelaVendas">
+          <tr>
+            <td class="td-bold">V-1001</td>
+            <td>Maria Silva</td>
+            <td>Tela LCD 15.6, Bateria Notebook</td>
+            <td>2</td>
+            <td>R$ 850,00</td>
+            <td>Cartão de Crédito</td>
+            <td><span class="badge badge-green">Pago</span></td>
+            <td>19/05/2026</td>
+            <td><div class="actions">
+              <button class="action-btn" title="Visualizar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="action-btn delete" title="Excluir" onclick="deleteRow(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg></button>
+            </div></td>
+          </tr>
+          <tr>
+            <td class="td-bold">V-1002</td>
+            <td>Pedro Santos</td>
+            <td>Bateria iPhone 13</td>
+            <td>1</td>
+            <td>R$ 280,00</td>
+            <td>PIX</td>
+            <td><span class="badge badge-green">Pago</span></td>
+            <td>18/05/2026</td>
+            <td><div class="actions">
+              <button class="action-btn" title="Visualizar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="action-btn delete" title="Excluir" onclick="deleteRow(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg></button>
+            </div></td>
+          </tr>
+          <tr>
+            <td class="td-bold">V-1003</td>
+            <td>Ana Costa</td>
+            <td>Cartucho HP Colorido</td>
+            <td>3</td>
+            <td>R$ 210,00</td>
+            <td>Dinheiro</td>
+            <td><span class="badge badge-yellow">Pendente</span></td>
+            <td>17/05/2026</td>
+            <td><div class="actions">
+              <button class="action-btn" title="Visualizar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="action-btn delete" title="Excluir" onclick="deleteRow(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg></button>
+            </div></td>
+          </tr>
+          <tr>
+            <td class="td-bold">V-1004</td>
+            <td>Carlos Lima</td>
+            <td>Memória RAM DDR4 8GB</td>
+            <td>2</td>
+            <td>R$ 320,00</td>
+            <td>Cartão de Débito</td>
+            <td><span class="badge badge-green">Pago</span></td>
+            <td>16/05/2026</td>
+            <td><div class="actions">
+              <button class="action-btn" title="Visualizar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="action-btn delete" title="Excluir" onclick="deleteRow(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg></button>
+            </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<div class="modal-overlay" id="modalVenda">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modalVenda')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal-title">Nova Venda</div>
+    <div class="modal-sub">Preencha os dados para registrar uma venda</div>
+    <form onsubmit="criarVenda(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Cliente</label>
+          <input type="text" id="vendaCliente" placeholder="Nome do cliente">
+        </div>
+        <div class="form-group">
+          <label>Forma de Pagamento</label>
+          <div class="select-wrapper">
+            <select id="vendaPagamento">
+              <option value="" disabled selected>Selecione...</option>
+              <option>Dinheiro</option>
+              <option>PIX</option>
+              <option>Cartão de Crédito</option>
+              <option>Cartão de Débito</option>
+            </select>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="form-group">
+          <label>Produtos</label>
+          <input type="text" id="vendaProdutos" placeholder="Ex: Bateria iPhone 13, Cabo USB-C">
+        </div>
+      </div>
+      <div class="form-row cols-3">
+        <div class="form-group">
+          <label>Quantidade</label>
+          <input type="number" id="vendaQtd" placeholder="0" min="0" value="1">
+        </div>
+        <div class="form-group">
+          <label>Valor Total</label>
+          <input type="text" id="vendaValor" placeholder="R$ 0,00">
+        </div>
+        <div class="form-group">
+          <label>Status</label>
+          <div class="select-wrapper">
+            <select id="vendaStatus">
+              <option value="Pendente">Pendente</option>
+              <option value="Pago">Pago</option>
+              <option value="Cancelado">Cancelado</option>
+            </select>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-cancel" onclick="closeModal('modalVenda')">Cancelar</button>
+        <button type="submit" class="btn-primary">Registrar Venda</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="../javascript/app.js"></script>
+<script>
+var vendaCounter = 1004;
+var vendaBadge = { 'Pago': 'badge-green', 'Pendente': 'badge-yellow', 'Cancelado': 'badge-red' };
+
+function criarVenda(e) {
+  e.preventDefault();
+  vendaCounter++;
+  var cliente = document.getElementById('vendaCliente').value;
+  var pag = document.getElementById('vendaPagamento').value;
+  var produtos = document.getElementById('vendaProdutos').value;
+  var qtd = document.getElementById('vendaQtd').value;
+  var valor = document.getElementById('vendaValor').value;
+  var status = document.getElementById('vendaStatus').value;
+  var today = new Date().toLocaleDateString('pt-BR');
+  var tr = document.createElement('tr');
+  tr.innerHTML =
+    '<td class="td-bold">V-' + vendaCounter + '</td>' +
+    '<td>' + cliente + '</td>' +
+    '<td>' + produtos + '</td>' +
+    '<td>' + qtd + '</td>' +
+    '<td>' + valor + '</td>' +
+    '<td>' + pag + '</td>' +
+    '<td><span class="badge ' + (vendaBadge[status] || 'badge-yellow') + '">' + status + '</span></td>' +
+    '<td>' + today + '</td>' +
+    '<td>' + makeDeleteBtn() + '</td>';
+  document.getElementById('tabelaVendas').insertBefore(tr, document.getElementById('tabelaVendas').firstChild);
+  e.target.reset();
+  closeModal('modalVenda');
+}
+</script>
+</body>
+</html>
